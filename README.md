@@ -1,6 +1,6 @@
-# Lo-Fi Prototype README
+# Self-Care Canvas Integration README
 
-## Project Title: Self-Care Canvas Integration
+## Project Title: UniWell
 
 ### Team Information
 - **Team Name:** CIS4930 P4- Team 10
@@ -48,7 +48,4 @@ Our most promising idea is a platform integrated with college log-in pages (like
 ### Conclusion
 The Self-Care Canvas Integration project aims to provide college students with a comprehensive platform for managing self-care tasks efficiently within their academic environment. Further development will focus on refining the prototype based on usability testing feedback and market research insights.
 
-For more details, refer to the project documentation.
 
----
-*Note: This README is a concise summary. For detailed information, please refer to the project documentation.*
