@@ -46,6 +46,6 @@ Our most promising idea is a platform integrated with college log-in pages (like
 - Value of brainstorming multiple solutions and considering user perspectives.
 
 ### Conclusion
-The Self-Care Canvas Integration project aims to provide college students with a comprehensive platform for managing self-care tasks efficiently within their academic environment. Further development will focus on refining the prototype based on usability testing feedback and market research insights.
+The UniWell project aims to provide college students with a comprehensive platform for managing self-care tasks efficiently within their academic environment. Further development will focus on refining the prototype based on usability testing feedback and market research insights.
 
 
