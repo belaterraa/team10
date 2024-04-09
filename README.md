@@ -14,6 +14,9 @@
 ### Overview
 This README document outlines the development process, design rationale, prototype details, usability testing, and market research conducted for the Self-Care Canvas Integration project.
 
+### Introduction
+Uniwell is an application that helps students keep track of their self-care tasks, receieve updates about events and resources offered by their school, and share their progress with friends. Uniwell is meant to be integrated into college log-on platforms like Canvas so that students can keep track of their self-care tasks and their school work all in one place.
+
 ### Revised Tasks
 - **Simple Task:** A checklist where students can add self-care activities and check them off when completed.
 - **Medium Task:** A guide for students to see recommended self-care activities and create/check off their own tasks.
