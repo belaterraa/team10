@@ -22,6 +22,10 @@ This README document outlines the development process, design rationale, prototy
 - **Revised Complex Task:** An interactive college Canvas “course” for finding resources, tracking activities, and sharing progress with friends.
 
 ### Storyboard
+#### Simple Task Storyboard
+Fred is a college student who has been super busy lately. He's been so busy that he's neglected some of his self-care tasks like showering. Fred added "showering" to his self-care checklist. While using Canvas to stay up to date with his classes, Fred also remembered to look at his checklist. Fred was reminded to shower and was able to be better at managing his self-care tasks.
+<img width="510" alt="simple" src="https://github.com/belaterraa/team10/assets/156029422/7690c922-193c-44dc-a446-127638a6fda0">
+
 
 ### User Research Summary
 We conducted our user research with paper prototypes and tasks that focused on navigation and task completion. For the most part, our participants were sucessful in completing each of our three tasks. Our particiapnts said that the design was intuitive and that t was easy to naviate back and forth between pages. Our largest piece of feedback across all users was that Uniwell needed more of its own features to stand out from existing Canvas features. That being said, we modified our revised complex task to include a "share" feature. This new share feature is unlike anything Canvas currently has implemented and will allow college students to share their self-care progress with friends.
