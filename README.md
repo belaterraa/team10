@@ -23,7 +23,7 @@ This README document outlines the development process, design rationale, prototy
 
 ### Storyboard
 #### Simple Task Storyboard
-Fred is a college student who has been super busy lately. He's been so busy that he's neglected some of his self-care tasks like showering. Fred added "showering" to his self-care checklist. While using Canvas to stay up to date with his classes, Fred also remembered to look at his checklist. Fred was reminded to shower and was able to be better at managing his self-care tasks.
+Fred is a college student who has been super busy lately. He's been so busy that he's neglected some of his self-care tasks like showering. Fred added "showering" to his self-care checklist. While using Canvas to stay up to date with his classes, Fred also remembered to look at his checklist. Fred was reminded to shower and was able to better manage his self-care tasks.
 
 <img width="510" alt="simple" src="https://github.com/belaterraa/team10/assets/156029422/7690c922-193c-44dc-a446-127638a6fda0">
 
