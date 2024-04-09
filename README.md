@@ -1,6 +1,7 @@
 # Self-Care Canvas Integration README
 
 ## Project Title: UniWell
+<img width="237" alt="Screenshot 2024-04-08 at 8 42 51 PM" src="https://github.com/belaterraa/team10/assets/156029422/40f62a14-c260-4b53-a7cd-3cfd25110343">
 
 ### Team Information
 - **Team Name:** CIS4930 P4- Team 10
