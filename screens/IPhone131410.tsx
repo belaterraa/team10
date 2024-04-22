@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, Linking } from "react-native";
 import { Image } from "expo-image";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
@@ -37,7 +37,10 @@ const IPhone131410 = () => {
         style={[styles.iphone13148Child2, styles.iphone13148ChildLayout1]}
       />
       <View style={[styles.iphone13148Inner, styles.iphone13148ChildLayout1]} />
-      <Text style={[styles.fsuRecreation, styles.fsuLayout]}>
+      <Text 
+        style={[styles.fsuRecreation, styles.fsuLayout]}
+        onPress={() => Linking.openURL('https://campusrec.fsu.edu/')}
+        >
         FSU Recreation
       </Text>
       <View
@@ -143,20 +146,26 @@ const IPhone131410 = () => {
         />
         <View style={[styles.groupChild4, styles.groupChild4Position]} />
       </View>
-      <Text style={[styles.fsuCounseling, styles.fsuLayout]}>
+      <Text style={[styles.fsuCounseling, styles.fsuLayout]}
+      onPress={() => Linking.openURL('https://counseling.fsu.edu/')}>
         FSU Counseling
       </Text>
-      <Text style={[styles.guidedYoga, styles.fsuLayout]}>Guided Yoga</Text>
-      <Text style={[styles.mindfulnessMeditation, styles.journalingTipsTypo]}>
+      <Text style={[styles.guidedYoga, styles.fsuLayout]}
+       onPress={() => Linking.openURL('https://www.youtube.com/watch?v=9MazN_6wdqI')}>Guided Yoga</Text>
+      <Text style={[styles.mindfulnessMeditation, styles.journalingTipsTypo]}
+      onPress={() => Linking.openURL('https://www.youtube.com/watch?v=ssss7V1_eyA')}>
         Mindfulness Meditation
       </Text>
-      <Text style={[styles.gratitudeExercises, styles.journalingTipsTypo]}>
+      <Text style={[styles.gratitudeExercises, styles.journalingTipsTypo]}
+      onPress={() => Linking.openURL('https://www.youtube.com/watch?v=6ubB_rqof9M')}>
         Gratitude Exercises
       </Text>
-      <Text style={[styles.journalingTips, styles.journalingTipsTypo]}>
+      <Text style={[styles.journalingTips, styles.journalingTipsTypo]}
+      onPress={() => Linking.openURL('https://vanillapapers.net/2019/11/13/journaling-tips/')}>
         Journaling Tips
       </Text>
-      <Text style={[styles.stressManagementGuide, styles.journalingTipsTypo]}>
+      <Text style={[styles.stressManagementGuide, styles.journalingTipsTypo]}
+      onPress={() => Linking.openURL('https://www.cdc.gov/violenceprevention/about/copingwith-stresstips.html')}>
         Stress Management Guide
       </Text>
       <Image

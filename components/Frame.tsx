@@ -1,5 +1,7 @@
 import * as React from "react";
+import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-paper";
 import { Color, FontSize, FontFamily, Border } from "../GlobalStyles";
 
@@ -8,6 +10,17 @@ export type FrameType = {
 };
 
 const Frame = ({ onClose }: FrameType) => {
+  const navigation = useNavigation();
+  const [username, setUsername] = useState("");
+
+  const handleTextInputChange = (text: React.SetStateAction<string>) => {
+    setUsername(text);
+  }
+
+  const handleSubmit = () => {
+    console.log('Text input value:', username);
+  };
+
   return (
     <View style={[styles.enterFriendsUsernameParent, styles.frameItemBorder]}>
       <Text style={[styles.enterFriendsUsername, styles.submitClr]}>
@@ -18,10 +31,12 @@ const Frame = ({ onClose }: FrameType) => {
         label="Enter Username"
         placeholder="Enter Username"
         mode="outlined"
+        onChangeText={handleTextInputChange}
+        value={username}
         theme={{ colors: { background: "#d9d9d9" } }}
       />
       <View style={[styles.frameItem, styles.frameItemBorder]} />
-      <Text style={[styles.submit, styles.submitClr]}>Submit</Text>
+      <Text style={[styles.submit, styles.submitClr]} onPress={handleSubmit}>Submit</Text>
     </View>
   );
 };

@@ -5,12 +5,55 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import Frame1 from "../components/Frame1";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import { CheckBox } from '@rneui/themed';
+import { red } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 
 const IPhone131411 = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   const [groupIconVisible, setGroupIconVisible] = useState(false);
   const [groupIcon1Visible, setGroupIcon1Visible] = useState(false);
   const [groupIcon2Visible, setGroupIcon2Visible] = useState(false);
+
+  // Button states
+  const [check1, toggleCheck1] = React.useState(false);
+  const [check2, toggleCheck2] = React.useState(false);
+  const [check3, toggleCheck3] = React.useState(false);
+  const [check4, toggleCheck4] = React.useState(false);
+  const [check5, toggleCheck5] = React.useState(false);
+  const [check6, toggleCheck6] = React.useState(false);
+  const [check7, toggleCheck7] = React.useState(false);
+  const [check8, toggleCheck8] = React.useState(false);
+  const [check9, toggleCheck9] = React.useState(false);
+
+  const handlePress1 = () => {
+    toggleCheck1(!check1); // toggle the pressed state
+  };
+  const handlePress2 = () => {
+    toggleCheck2(!check2); // toggle the pressed state
+  };
+  const handlePress3 = () => {
+    toggleCheck3(!check3); // toggle the pressed state
+  };
+  const handlePress4 = () => {
+    toggleCheck4(!check4); // toggle the pressed state
+  };
+  const handlePress5 = () => {
+    toggleCheck5(!check5); // toggle the pressed state
+  };
+  const handlePress6 = () => {
+    toggleCheck6(!check6); // toggle the pressed state
+  };
+  const handlePress7 = () => {
+    toggleCheck7(!check7); // toggle the pressed state
+  };
+  const handlePress8 = () => {
+    toggleCheck8(!check8); // toggle the pressed state
+  };
+  const handlePress9 = () => {
+    toggleCheck9(!check9); // toggle the pressed state
+  };
+
+  // Button Functions
 
   const openGroupIcon = useCallback(() => {
     setGroupIconVisible(true);
@@ -63,13 +106,28 @@ const IPhone131411 = () => {
         </Pressable>
         <View style={styles.iphone131411Inner} />
         <Text style={styles.myTasks}>My Tasks</Text>
-        <View style={[styles.rectangleView, styles.iphone131411ChildLayout1]} />
-        <View
-          style={[styles.iphone131411Child1, styles.iphone131411ChildLayout1]}
-        />
-        <View
-          style={[styles.iphone131411Child2, styles.iphone131411ChildLayout1]}
-        />
+        {/* This is the first box */}
+        <Pressable
+          onPress={handlePress1}
+        >
+          <View 
+            style={[styles.rectangleView, styles.iphone131411ChildLayout1, check1 && styles.checkedStyle]}
+          />
+        </Pressable>
+        <Pressable
+          onPress={handlePress2}
+        >
+          <View
+          style={[styles.iphone131411Child1, styles.iphone131411ChildLayout1, check2 && styles.checkedStyle]}
+          />
+        </Pressable>
+        <Pressable
+          onPress={handlePress3}
+        >
+          <View
+            style={[styles.iphone131411Child2, styles.iphone131411ChildLayout1, check3 && styles.checkedStyle]}
+          />
+        </Pressable>
         <Image
           style={[styles.rectangleIcon, styles.iphone131411ChildLayout]}
           contentFit="cover"
@@ -91,15 +149,27 @@ const IPhone131411 = () => {
         <View
           style={[styles.iphone131411Child3, styles.iphone131411ChildLayout2]}
         />
+        <Pressable
+          onPress={handlePress4}
+        >
         <View
-          style={[styles.iphone131411Child4, styles.iphone131411ChildLayout1]}
+          style={[styles.iphone131411Child4, styles.iphone131411ChildLayout1, check4 && styles.checkedStyle]}
         />
+        </Pressable>
+        <Pressable
+          onPress={handlePress5}
+        >
         <View
-          style={[styles.iphone131411Child5, styles.iphone131411ChildLayout1]}
+          style={[styles.iphone131411Child5, styles.iphone131411ChildLayout1, check5 && styles.checkedStyle]}
         />
+        </Pressable>
+        <Pressable
+          onPress={handlePress6}
+        >
         <View
-          style={[styles.iphone131411Child6, styles.iphone131411ChildLayout1]}
+          style={[styles.iphone131411Child6, styles.iphone131411ChildLayout1, check6 && styles.checkedStyle]}
         />
+        </Pressable>
         <Image
           style={[styles.iphone131411Child7, styles.iphone131411ChildLayout]}
           contentFit="cover"
@@ -121,15 +191,27 @@ const IPhone131411 = () => {
         <View
           style={[styles.iphone131411Child8, styles.iphone131411ChildLayout2]}
         />
+        <Pressable
+          onPress={handlePress7}
+        >
         <View
-          style={[styles.iphone131411Child9, styles.iphone131411ChildLayout1]}
+          style={[styles.iphone131411Child9, styles.iphone131411ChildLayout1, check7 && styles.checkedStyle]}
         />
+        </Pressable>
+        <Pressable
+          onPress={handlePress8}
+        >
         <View
-          style={[styles.iphone131411Child10, styles.iphone131411ChildLayout1]}
+          style={[styles.iphone131411Child10, styles.iphone131411ChildLayout1, check8 && styles.checkedStyle]}
         />
+        </Pressable>
+        <Pressable
+          onPress={handlePress9}
+        >
         <View
-          style={[styles.iphone131411Child11, styles.iphone131411ChildLayout1]}
+          style={[styles.iphone131411Child11, styles.iphone131411ChildLayout1, check9 && styles.checkedStyle]}
         />
+        </Pressable>
         <Image
           style={[styles.iphone131411Child12, styles.iphone131411ChildLayout]}
           contentFit="cover"
@@ -175,6 +257,9 @@ const IPhone131411 = () => {
 };
 
 const styles = StyleSheet.create({
+  checkedStyle: {
+    backgroundColor: 'lightgreen',
+  },
   iphone131411ChildLayout2: {
     height: 159,
     width: 343,

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet, View, Text, Pressable, Modal } from "react-native";
 import { Image } from "expo-image";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -9,6 +9,7 @@ import { Color, FontFamily, FontSize } from "../GlobalStyles";
 const IPhone131414 = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   const [ellipseIconVisible, setEllipseIconVisible] = useState(false);
+  const [username, setUsername] = useState<string | undefined>();
 
   const openEllipseIcon = useCallback(() => {
     setEllipseIconVisible(true);
