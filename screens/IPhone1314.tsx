@@ -35,9 +35,7 @@ const IPhone1314 = () => {
       <View
         style={[styles.iphone13141Child3, styles.iphone13141Child3Position]}
       />
-      <Text style={[styles.editDashboard, styles.editDashboardTypo]}>
-        Edit Dashboard
-      </Text>
+
       <Text style={[styles.a, styles.aTypo]}>100%- A</Text>
       <Text style={[styles.wel10000001sp24, styles.editDashboardTypo]}>
         WEL1000-0001.sp24
