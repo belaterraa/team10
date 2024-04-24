@@ -7,9 +7,10 @@ import { Color, FontSize, FontFamily, Border } from "../GlobalStyles";
 
 export type FrameType = {
   onClose?: () => void;
+  onSubmit: (name: string) => void;
 };
 
-const Frame = ({ onClose }: FrameType) => {
+const Frame = ({ onClose, onSubmit }: FrameType) => {
   const navigation = useNavigation();
   const [username, setUsername] = useState("");
 
@@ -18,7 +19,12 @@ const Frame = ({ onClose }: FrameType) => {
   }
 
   const handleSubmit = () => {
-    console.log('Text input value:', username);
+    console.log("Submit button pressed");
+    if (username.trim() !== " ") {
+
+      onSubmit(username);
+      setUsername("");
+    }
   };
 
   return (
@@ -32,14 +38,18 @@ const Frame = ({ onClose }: FrameType) => {
         placeholder="Enter Username"
         mode="outlined"
         onChangeText={handleTextInputChange}
+        onSubmitEditing={handleSubmit} // Handle submit on Enter press
         value={username}
         theme={{ colors: { background: "#d9d9d9" } }}
       />
       <View style={[styles.frameItem, styles.frameItemBorder]} />
-      <Text style={[styles.submit, styles.submitClr]} onPress={handleSubmit}>Submit</Text>
+      <Text style={[styles.submit, styles.submitClr]} onPress={handleSubmit}>
+        Submit
+      </Text>
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   frameItemBorder: {

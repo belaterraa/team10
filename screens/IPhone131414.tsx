@@ -10,6 +10,7 @@ const IPhone131414 = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   const [ellipseIconVisible, setEllipseIconVisible] = useState(false);
   const [username, setUsername] = useState<string | undefined>();
+  const [names, setNames] = useState<string[]>([]);
 
   const openEllipseIcon = useCallback(() => {
     setEllipseIconVisible(true);
@@ -18,6 +19,12 @@ const IPhone131414 = () => {
   const closeEllipseIcon = useCallback(() => {
     setEllipseIconVisible(false);
   }, []);
+
+const handleAddName = (name: string) => {
+  console.log("Adding name:", name);
+  setNames(prevNames => [...prevNames, name]);
+  closeEllipseIcon();
+};
 
   return (
     <>
@@ -39,26 +46,28 @@ const IPhone131414 = () => {
         </Pressable>
         <View style={[styles.iphone131416Item, styles.iphone131416Position]} />
         <View style={[styles.iphone131416Inner, styles.rectangleViewBorder]} />
-        <Text style={styles.myFriendsList}>My Friends List</Text>
-        <View style={[styles.rectangleView, styles.rectangleViewBorder]} />
         <View style={[styles.lineView, styles.lineChildLayout]} />
-        <View style={[styles.iphone131416Child1, styles.lineChildLayout]} />
-        <View style={[styles.iphone131416Child2, styles.lineChildLayout]} />
-        <Image
-          style={[styles.lineIcon, styles.lineChildLayout]}
-          contentFit="cover"
-          source={require("../assets/line-23.png")}
-        />
-        <Image
-          style={[styles.iphone131416Child3, styles.lineChildLayout]}
-          contentFit="cover"
-          source={require("../assets/line-23.png")}
-        />
-        <Text style={[styles.dave, styles.robTypo]}>Dave</Text>
-        <Text style={[styles.emma, styles.robTypo]}>Emma</Text>
-        <Text style={[styles.jessica, styles.robTypo]}>Jessica</Text>
-        <Text style={[styles.mark, styles.robTypo]}>Mark</Text>
-        <Text style={[styles.rob, styles.robTypo]}>Rob</Text>
+        <View style={[styles.rectangleView, styles.rectangleViewBorder]} />
+        <View style={[styles.iphone131416Inner, styles.rectangleViewBorder]}>
+          <Text style={styles.myFriendsList}>My Friends List</Text>
+          <View style={styles.namesContainer}>
+            {names.map((name, index) => (
+              <View style={styles.nameItem} key={index}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Image
+                    source={require("../assets/group-23.png")}
+                    style={{ width: 30, height: 30, resizeMode: "contain", marginRight: 10, marginLeft: 10 }}
+                  />
+                  <Text style={styles.nameText}>{name}</Text>
+            </View>
+            <Image
+              source={require("../assets/line-23.png")}
+              style={{ width: "100%", height: 1, marginTop: 15 }}
+            />
+          </View>
+        ))}
+      </View>
+        </View>
         <View style={[styles.ellipseParent, styles.containerLayout]}>
           <Pressable
             style={[styles.container, styles.containerLayout]}
@@ -73,37 +82,12 @@ const IPhone131414 = () => {
           <View style={[styles.groupItem, styles.groupLayout]} />
           </Pressable>
         </View>
-        <Image
-          style={styles.groupIcon}
-          contentFit="cover"
-          source={require("../assets/group-23.png")}
-        />
-        <Image
-          style={[styles.iphone131416Child4, styles.iphone131416ChildPosition1]}
-          contentFit="cover"
-          source={require("../assets/group-23.png")}
-        />
-        <Image
-          style={[styles.iphone131416Child5, styles.iphone131416ChildPosition]}
-          contentFit="cover"
-          source={require("../assets/group-23.png")}
-        />
-        <Image
-          style={[styles.iphone131416Child6, styles.iphone131416ChildPosition1]}
-          contentFit="cover"
-          source={require("../assets/group-23.png")}
-        />
-        <Image
-          style={[styles.iphone131416Child7, styles.iphone131416ChildPosition]}
-          contentFit="cover"
-          source={require("../assets/group-23.png")}
-        />
       </View>
 
       <Modal animationType="fade" transparent visible={ellipseIconVisible}>
         <View style={styles.ellipseIconOverlay}>
           <Pressable style={styles.ellipseIconBg} onPress={closeEllipseIcon} />
-          <Frame onClose={closeEllipseIcon} />
+          <Frame onSubmit={handleAddName} onClose={closeEllipseIcon} />
         </View>
       </Modal>
     </>
@@ -235,12 +219,12 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
   },
   myFriendsList: {
-    left: 40,
+    left: 20,
     fontSize: 30,
     width: 289,
-    height: 31,
+    height: 100,
     color: Color.colorBlack,
-    top: 135,
+    top: 8,
     textAlign: "left",
     fontFamily: FontFamily.interMedium,
     fontWeight: "500",
@@ -293,25 +277,6 @@ const styles = StyleSheet.create({
     width: 324,
     height: 1,
     left: 31,
-  },
-  dave: {
-    top: 193,
-    width: 124,
-    fontFamily: FontFamily.interRegular,
-    fontSize: FontSize.size_xl,
-    left: 87,
-  },
-  emma: {
-    top: 248,
-  },
-  jessica: {
-    top: 303,
-  },
-  mark: {
-    top: 357,
-  },
-  rob: {
-    top: 413,
   },
   ellipseIconOverlay: {
     flex: 1,
@@ -374,6 +339,17 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     width: "100%",
     backgroundColor: Color.colorWhite,
+  },
+  namesContainer: {
+    marginTop: 70,
+  },
+  nameItem: {
+    marginBottom: 13, 
+  },
+  nameText: {
+    fontSize: FontSize.size_base,
+    fontFamily: FontFamily.interRegular,
+    color: Color.colorBlack,
   },
 });
 

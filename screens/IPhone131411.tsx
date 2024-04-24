@@ -1,12 +1,10 @@
 import React, { useState, useCallback } from "react";
-import { StyleSheet, View, Text, Pressable, Modal } from "react-native";
+import { StyleSheet, View, Text, Pressable, Modal, FlatList } from "react-native";
 import { Image } from "expo-image";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import Frame1 from "../components/Frame1";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
-import { CheckBox } from '@rneui/themed';
-import { red } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 
 const IPhone131411 = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
@@ -14,46 +12,9 @@ const IPhone131411 = () => {
   const [groupIcon1Visible, setGroupIcon1Visible] = useState(false);
   const [groupIcon2Visible, setGroupIcon2Visible] = useState(false);
 
-  // Button states
-  const [check1, toggleCheck1] = React.useState(false);
-  const [check2, toggleCheck2] = React.useState(false);
-  const [check3, toggleCheck3] = React.useState(false);
-  const [check4, toggleCheck4] = React.useState(false);
-  const [check5, toggleCheck5] = React.useState(false);
-  const [check6, toggleCheck6] = React.useState(false);
-  const [check7, toggleCheck7] = React.useState(false);
-  const [check8, toggleCheck8] = React.useState(false);
-  const [check9, toggleCheck9] = React.useState(false);
-
-  const handlePress1 = () => {
-    toggleCheck1(!check1); // toggle the pressed state
-  };
-  const handlePress2 = () => {
-    toggleCheck2(!check2); // toggle the pressed state
-  };
-  const handlePress3 = () => {
-    toggleCheck3(!check3); // toggle the pressed state
-  };
-  const handlePress4 = () => {
-    toggleCheck4(!check4); // toggle the pressed state
-  };
-  const handlePress5 = () => {
-    toggleCheck5(!check5); // toggle the pressed state
-  };
-  const handlePress6 = () => {
-    toggleCheck6(!check6); // toggle the pressed state
-  };
-  const handlePress7 = () => {
-    toggleCheck7(!check7); // toggle the pressed state
-  };
-  const handlePress8 = () => {
-    toggleCheck8(!check8); // toggle the pressed state
-  };
-  const handlePress9 = () => {
-    toggleCheck9(!check9); // toggle the pressed state
-  };
-
-  // Button Functions
+  const [monthlyTasks, setMonthlyTasks] = useState<{ task: string; checked: boolean }[]>([]);
+  const [weeklyTasks, setWeeklyTasks] = useState<{ task: string; checked: boolean }[]>([]);
+  const [dailyTasks, setDailyTasks] = useState<{ task: string; checked: boolean }[]>([]);
 
   const openGroupIcon = useCallback(() => {
     setGroupIconVisible(true);
@@ -79,12 +40,38 @@ const IPhone131411 = () => {
     setGroupIcon2Visible(false);
   }, []);
 
+  const addMonthlyTask = (task: string) => {
+    setMonthlyTasks([...monthlyTasks, { task, checked: false }]);
+  };
+
+  const addWeeklyTask = (task: string) => {
+    setWeeklyTasks([...weeklyTasks, { task, checked: false }]);
+  };
+
+  const addDailyTask = (task: string) => {
+    setDailyTasks([...dailyTasks, { task, checked: false }]);
+  };
+
+  const toggleChecked = (list: any[], index: number) => {
+    const newList = [...list];
+    newList[index].checked = !newList[index].checked;
+    if (index > -1) {
+      if (list === monthlyTasks) setMonthlyTasks(newList);
+      else if (list === weeklyTasks) setWeeklyTasks(newList);
+      else if (list === dailyTasks) setDailyTasks(newList);
+    }
+  };
+
   return (
     <>
       <View style={styles.iphone131411}>
         <View
           style={[styles.iphone131411Child, styles.iphone131411ChildLayout2]}
         />
+        <View style={[styles.iphone131411ChildLayout, styles.weeklyChildLayout2]}>
+        </View>
+        <View style={[styles.iphone131411ChildLayout, styles.dailyChildLayout2]}>
+        </View>
         <View style={styles.iphone131411Item} />
         <Text
           style={[styles.wel10000001sp24WellnessAn, styles.journalLogsTypo]}
@@ -106,39 +93,57 @@ const IPhone131411 = () => {
         </Pressable>
         <View style={styles.iphone131411Inner} />
         <Text style={styles.myTasks}>My Tasks</Text>
-        {/* This is the first box */}
-        <Pressable
-          onPress={handlePress1}
-        >
-          <View 
-            style={[styles.rectangleView, styles.iphone131411ChildLayout1, check1 && styles.checkedStyle]}
+        
+        <View style={[styles.listBox, styles.monthlyBox]}>
+          <Text style={[styles.text, styles.monthlyAprilTypo]}>Monthly: April</Text>
+          <FlatList
+            data={monthlyTasks}
+            renderItem={({ item, index }) => (
+              <Pressable onPress={() => toggleChecked(monthlyTasks, index)}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={[styles.checkbox, item.checked && styles.checkedStyle]} />
+                  <Text style={styles.listItem}>{item.task}</Text>
+                </View>
+              </Pressable>
+            )}
+            keyExtractor={(item, index) => index.toString()}
           />
-        </Pressable>
-        <Pressable
-          onPress={handlePress2}
-        >
-          <View
-          style={[styles.iphone131411Child1, styles.iphone131411ChildLayout1, check2 && styles.checkedStyle]}
+        </View>
+        
+        <View style={[styles.listBox, styles.weeklyBox]}>
+          <Text style={[styles.text, styles.monthlyAprilTypo]}>Weekly: 4/24-4/28</Text>
+          <FlatList
+            data={weeklyTasks}
+            renderItem={({ item, index }) => (
+              <Pressable onPress={() => toggleChecked(weeklyTasks, index)}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={[styles.checkbox, item.checked && styles.checkedStyle]} />
+                  <Text style={styles.listItem}>{item.task}</Text>
+                </View>
+              </Pressable>
+            )}
+            keyExtractor={(item, index) => index.toString()}
           />
-        </Pressable>
-        <Pressable
-          onPress={handlePress3}
-        >
-          <View
-            style={[styles.iphone131411Child2, styles.iphone131411ChildLayout1, check3 && styles.checkedStyle]}
+        </View>
+        
+        <View style={[styles.listBox, styles.dailyBox]}>
+          <Text style={[styles.text, styles.monthlyAprilTypo]}>Daily: April 24th</Text>
+          <FlatList
+            data={dailyTasks}
+            renderItem={({ item, index }) => (
+              <Pressable onPress={() => toggleChecked(dailyTasks, index)}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={[styles.checkbox, item.checked && styles.checkedStyle]} />
+                  <Text style={styles.listItem}>{item.task}</Text>
+                </View>
+              </Pressable>
+            )}
+            keyExtractor={(item, index) => index.toString()}
           />
-        </Pressable>
-        <Image
-          style={[styles.rectangleIcon, styles.iphone131411ChildLayout]}
-          contentFit="cover"
-          source={require("../assets/rectangle-74.png")}
-        />
-        <Text style={[styles.monthlyApril, styles.monthlyAprilTypo]}>
-          Monthly: April
-        </Text>
+        </View>
         <Pressable
           style={[styles.container, styles.frameLayout]}
-          onPress={openGroupIcon}
+          onPress={openGroupIcon}w
         >
           <Image
             style={styles.icon}
@@ -146,38 +151,6 @@ const IPhone131411 = () => {
             source={require("../assets/group-18.png")}
           />
         </Pressable>
-        <View
-          style={[styles.iphone131411Child3, styles.iphone131411ChildLayout2]}
-        />
-        <Pressable
-          onPress={handlePress4}
-        >
-        <View
-          style={[styles.iphone131411Child4, styles.iphone131411ChildLayout1, check4 && styles.checkedStyle]}
-        />
-        </Pressable>
-        <Pressable
-          onPress={handlePress5}
-        >
-        <View
-          style={[styles.iphone131411Child5, styles.iphone131411ChildLayout1, check5 && styles.checkedStyle]}
-        />
-        </Pressable>
-        <Pressable
-          onPress={handlePress6}
-        >
-        <View
-          style={[styles.iphone131411Child6, styles.iphone131411ChildLayout1, check6 && styles.checkedStyle]}
-        />
-        </Pressable>
-        <Image
-          style={[styles.iphone131411Child7, styles.iphone131411ChildLayout]}
-          contentFit="cover"
-          source={require("../assets/rectangle-74.png")}
-        />
-        <Text style={[styles.weekly422428, styles.monthlyAprilTypo]}>
-          Weekly: 4/22-4/28
-        </Text>
         <Pressable
           style={[styles.frame, styles.frameLayout]}
           onPress={openGroupIcon1}
@@ -188,38 +161,6 @@ const IPhone131411 = () => {
             source={require("../assets/group-18.png")}
           />
         </Pressable>
-        <View
-          style={[styles.iphone131411Child8, styles.iphone131411ChildLayout2]}
-        />
-        <Pressable
-          onPress={handlePress7}
-        >
-        <View
-          style={[styles.iphone131411Child9, styles.iphone131411ChildLayout1, check7 && styles.checkedStyle]}
-        />
-        </Pressable>
-        <Pressable
-          onPress={handlePress8}
-        >
-        <View
-          style={[styles.iphone131411Child10, styles.iphone131411ChildLayout1, check8 && styles.checkedStyle]}
-        />
-        </Pressable>
-        <Pressable
-          onPress={handlePress9}
-        >
-        <View
-          style={[styles.iphone131411Child11, styles.iphone131411ChildLayout1, check9 && styles.checkedStyle]}
-        />
-        </Pressable>
-        <Image
-          style={[styles.iphone131411Child12, styles.iphone131411ChildLayout]}
-          contentFit="cover"
-          source={require("../assets/rectangle-74.png")}
-        />
-        <Text style={[styles.dailyApril24th, styles.monthlyAprilTypo]}>
-          Daily: April 24th
-        </Text>
         <Pressable
           style={[styles.groupPressable, styles.frameLayout]}
           onPress={openGroupIcon2}
@@ -233,30 +174,37 @@ const IPhone131411 = () => {
       </View>
 
       <Modal animationType="fade" transparent visible={groupIconVisible}>
-        <View style={styles.groupIconOverlay}>
-          <Pressable style={styles.groupIconBg} onPress={closeGroupIcon} />
-          <Frame1 onClose={closeGroupIcon} />
-        </View>
+          <View style={styles.modalOverlay}>
+            <Pressable style={styles.modalBg} onPress={closeGroupIcon} />
+            <Frame1 onClose={closeGroupIcon} onSubmit={addMonthlyTask} />
+          </View>
       </Modal>
 
       <Modal animationType="fade" transparent visible={groupIcon1Visible}>
-        <View style={styles.groupIcon1Overlay}>
-          <Pressable style={styles.groupIcon1Bg} onPress={closeGroupIcon1} />
-          <Frame1 onClose={closeGroupIcon1} />
-        </View>
-      </Modal>
+          <View style={styles.modalOverlay}>
+            <Pressable style={styles.modalBg} onPress={closeGroupIcon1} />
+            <Frame1 onClose={closeGroupIcon1} onSubmit={addWeeklyTask} />
+          </View>
+        </Modal>
 
-      <Modal animationType="fade" transparent visible={groupIcon2Visible}>
-        <View style={styles.groupIcon2Overlay}>
-          <Pressable style={styles.groupIcon2Bg} onPress={closeGroupIcon2} />
-          <Frame1 onClose={closeGroupIcon2} />
-        </View>
-      </Modal>
+        <Modal animationType="fade" transparent visible={groupIcon2Visible}>
+          <View style={styles.modalOverlay}>
+            <Pressable style={styles.modalBg} onPress={closeGroupIcon2} />
+            <Frame1 onClose={closeGroupIcon2} onSubmit={addDailyTask} />
+          </View>
+        </Modal>
     </>
   );
 };
 
+
 const styles = StyleSheet.create({
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: Color.colorBlack,
+  },
   checkedStyle: {
     backgroundColor: 'lightgreen',
   },
@@ -297,11 +245,14 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   monthlyAprilTypo: {
-    height: 41,
-    width: 181,
+    height: 45,
+    width: 343,
     fontFamily: FontFamily.interRegular,
     fontSize: FontSize.size_xl,
-    left: 30,
+    borderWidth: 1,
+    borderColor: Color.colorDarkgray_100,
+    top: -54,
+    left: -10,
     color: Color.colorBlack,
     textAlign: "left",
     position: "absolute",
@@ -403,7 +354,9 @@ const styles = StyleSheet.create({
     top: 178,
   },
   monthlyApril: {
-    top: 189,
+    position: "absolute",
+    top: 200,
+    left: 30,
   },
   groupIconOverlay: {
     flex: 1,
@@ -437,7 +390,9 @@ const styles = StyleSheet.create({
     top: 398,
   },
   weekly422428: {
-    top: 409,
+    position: "absolute",
+    top: 420,
+    left: 30
   },
   groupIcon1Overlay: {
     flex: 1,
@@ -471,7 +426,9 @@ const styles = StyleSheet.create({
     top: 615,
   },
   dailyApril24th: {
-    top: 626,
+    position: "absolute",
+    top: 645,
+    left: 30,
   },
   groupIcon2Overlay: {
     flex: 1,
@@ -487,7 +444,7 @@ const styles = StyleSheet.create({
     top: 0,
   },
   groupPressable: {
-    top: 619,
+    top: 628,
   },
   iphone131411: {
     flex: 1,
@@ -496,6 +453,63 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: Color.colorWhite,
   },
+  monthlyBox: {
+    top: 220,
+    left: 30,
+    position: "absolute",
+  },
+  weeklyBox: {
+    top: 440,
+    left: 30,
+    position: "absolute",
+  },
+  dailyBox: {
+    top: 668,
+    left: 30,
+    position: "absolute",
+  },
+  listBox: {
+    marginTop: 10,
+  },
+  listItem: {
+    fontSize: 16,
+    fontFamily: FontFamily.interMedium,
+    color: Color.colorBlack,
+    marginBottom: 15,
+    marginLeft: 5,
+    textAlignVertical: 'center',
+  },
+  weeklyChildLayout2: {
+    top: 441, 
+    height: 159, 
+    width: 343, 
+    borderWidth: 1,
+    borderColor: Color.colorDarkgray_100,
+    position: "absolute",
+    backgroundColor: Color.colorWhite,
+  },
+  dailyChildLayout2: {
+    top: 669, 
+    height: 159, 
+    width: 343, 
+    borderWidth: 1,
+    borderColor: Color.colorDarkgray_100,
+    position: "absolute",
+    backgroundColor: Color.colorWhite,
+  },
+
+  modalOverlay: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(113, 113, 113, 0.3)",
+  },
+  modalBg: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
 });
+
 
 export default IPhone131411;

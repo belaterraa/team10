@@ -1,80 +1,103 @@
 import * as React from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { Image } from "expo-image";
+import { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-paper";
-import Enter from "./Enter";
 import { Color, FontSize, FontFamily, Border } from "../GlobalStyles";
 
 export type Frame1Type = {
   onClose?: () => void;
+  onSubmit: (task: string) => void;
 };
 
-const Frame1 = ({ onClose }: Frame1Type) => {
+const Frame1 = ({ onClose, onSubmit }: Frame1Type) => {
+  const navigation = useNavigation();
+  const [taskDescription, setTaskDescription] = useState("");
+
+  const handleTextInputChange = (text: string) => {
+    setTaskDescription(text);
+  };
+
+  const handleSubmit = () => {
+    if (taskDescription.trim() !== "") {
+      onSubmit(taskDescription);
+      setTaskDescription("");
+      if (onClose) onClose();
+    }
+  };
+
   return (
-    <View style={[styles.rectangleParent, styles.frameChildLayout]}>
-      <View style={[styles.frameChild, styles.frameChildLayout]} />
-      <Text style={styles.newTask}>New Task:</Text>
-      <Image
-        style={styles.frameItem}
-        contentFit="cover"
-        source={require("../assets/rectangle-641.png")}
-      />
-      <Enter />
+    <View style={[styles.enterFriendsUsernameParent, styles.frameItemBorder]}>
+      <Text style={[styles.enterFriendsUsername, styles.submitClr]}>
+        Enter Task Description
+      </Text>
       <TextInput
-        style={styles.frameInner}
-        label="Task description"
-        placeholder="Describe your task"
+        style={styles.frameChild}
+        label="Enter Task Description"
+        placeholder="Enter Task Description"
         mode="outlined"
+        onChangeText={handleTextInputChange}
+        value={taskDescription}
         theme={{ colors: { background: "#d9d9d9" } }}
       />
+      <View style={[styles.frameItem, styles.frameItemBorder]} />
+      <Text style={[styles.submit, styles.submitClr]} onPress={handleSubmit}>
+        Submit
+      </Text>
     </View>
   );
 };
 
+
 const styles = StyleSheet.create({
-  frameChildLayout: {
-    height: 161,
-    width: 255,
-    borderWidth: 1,
+  frameItemBorder: {
+    borderColor: Color.colorBlack,
     borderStyle: "solid",
   },
-  frameChild: {
-    top: 0,
-    left: 0,
-    backgroundColor: Color.colorGainsboro_100,
-    borderColor: Color.colorDarkgray_200,
+  submitClr: {
+    color: Color.colorBlack,
     position: "absolute",
   },
-  newTask: {
-    top: 11,
-    left: 13,
+  enterFriendsUsername: {
+    top: 17,
+    left: 23,
     fontSize: FontSize.size_5xl,
     fontFamily: FontFamily.interRegular,
-    color: Color.colorBlack,
     textAlign: "left",
-    width: 134,
-    height: 38,
+  },
+  frameChild: {
+    top: 63,
+    left: 26,
+    width: 288,
+    height: 36,
     position: "absolute",
   },
   frameItem: {
-    top: 126,
-    left: 184,
-    borderRadius: Border.br_81xl,
-    width: 62,
-    height: 27,
+    top: 116,
+    left: 36,
+    borderRadius: Border.br_31xl,
+    backgroundColor: Color.colorMediumpurple,
+    borderWidth: 1,
+    width: 268,
+    height: 54,
     position: "absolute",
   },
-  frameInner: {
-    top: 44,
-    left: 15,
-    width: 227,
-    height: 25,
-    position: "absolute",
+  submit: {
+    top: 128,
+    left: 84,
+    fontSize: FontSize.size_9xl,
+    fontWeight: "500",
+    fontFamily: FontFamily.interMedium,
+    textAlign: "center",
+    width: 171,
+    height: 30,
   },
-  rectangleParent: {
-    borderRadius: 28,
+  enterFriendsUsernameParent: {
+    borderRadius: 29,
     backgroundColor: Color.colorWhite,
-    borderColor: Color.colorBlack,
+    borderWidth: 5,
+    width: 346,
+    height: 192,
     overflow: "hidden",
     maxWidth: "100%",
     maxHeight: "100%",
